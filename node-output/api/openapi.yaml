@@ -1,0 +1,173 @@
+openapi: 3.0.0
+info:
+  title: product info
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/PISEYDEC_1/product/1.0.0
+  description: SwaggerHub API Auto Mocking
+paths:
+  /product:
+    get:
+      description: get a student info
+      operationId: productGET
+      parameters:
+      - name: qty
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: a list of student info
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/inline_response_200'
+                x-content-type: application/json
+      x-swagger-router-controller: Default
+    post:
+      description: create a student info
+      operationId: productPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/product_body'
+      responses:
+        "201":
+          description: successfully create a student
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_201'
+      x-swagger-router-controller: Default
+  /users:
+    post:
+      description: create a new user
+      operationId: usersPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/users_body'
+      responses:
+        "201":
+          description: successful create user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_201_1'
+      x-swagger-router-controller: Default
+  /tokens:
+    post:
+      description: create a new token
+      operationId: tokensPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tokens_body'
+      responses:
+        "201":
+          description: successful create token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_201_2'
+      x-swagger-router-controller: Default
+components:
+  schemas:
+    inline_response_200:
+      type: object
+      properties:
+        pro_id:
+          type: string
+          format: uuid
+        pro_name:
+          type: string
+        pro_type:
+          type: string
+        qty:
+          type: integer
+      example:
+        pro_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        qty: 0
+        pro_type: pro_type
+        pro_name: pro_name
+    product_body:
+      type: object
+      properties:
+        pro_name:
+          type: string
+          example: Danisa
+        pro_type:
+          type: string
+          example: Cake
+        qty:
+          type: integer
+          example: 3
+    inline_response_201:
+      type: object
+      properties:
+        pro_id:
+          type: string
+          format: uuid
+        pro_name:
+          type: string
+          example: Danisa
+        pro_type:
+          type: string
+          example: Cake
+        qty:
+          type: integer
+          example: 3
+      example:
+        pro_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        qty: 3
+        pro_type: Cake
+        pro_name: Danisa
+    users_body:
+      type: object
+      properties:
+        username:
+          type: string
+          example: Kimleng
+        password:
+          type: string
+          format: password
+        fullname:
+          type: string
+          example: Khoeurn Kimleng
+    inline_response_201_1:
+      type: object
+      properties:
+        username:
+          type: string
+          example: Kimleng
+        uuid:
+          type: string
+          format: uuid
+      example:
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        username: Kimleng
+    tokens_body:
+      type: object
+      properties:
+        username:
+          type: string
+          example: Kimleng
+        password:
+          type: string
+          format: password
+    inline_response_201_2:
+      type: object
+      properties:
+        token:
+          type: string
+          example: rw2xZkajIl
+      example:
+        token: rw2xZkajIl
